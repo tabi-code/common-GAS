@@ -1,2 +1,2 @@
-# common-GAS
+# gas-common
 GASの共通機能
