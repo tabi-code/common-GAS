@@ -8,8 +8,5 @@
  * @customfunction
  */
 function SetRangeValues(Sheet, RosNumber, ColumnNumber, RangeValues){
-  Browser.msgBox(RangeValues)
-  Browser.msgBox(RangeValues.length)
-  Browser.msgBox(RangeValues[0].length)
   Sheet.getRange(RosNumber, ColumnNumber, RangeValues.length, RangeValues[0].length).setValues(RangeValues);
 }
