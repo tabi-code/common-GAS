@@ -3,9 +3,31 @@
  *
  * @param {string} メニュータブ名
  * @param {Object.<string, string>} <メニュー名, 関数名>
+ * @customfunction
  */
 function AddMenuToSheet(MenuName, MenuList){
-  var sheet = SpreadsheetApp.getActiveSpreadsheet();
-  sheet.addMenu(MenuName, MenuList);
+  let Sheet = SpreadsheetApp.getActiveSpreadsheet();
+  Sheet.addMenu(MenuName, MenuList);
 }
-AddMenuToSheet
+
+/**
+ * 必要なシートを作成、不要なシートを削除する
+ *
+ * @param {Object.<string, <Array.<String>>} シートとカラム名のリスト
+ * @customfunction
+ */
+function CreateAndDeleteSheet(SheetsAndColumns){
+  let Sheet = SpreadsheetApp.getActiveSpreadsheet();
+  let Sheets = Sheet.getSheets();
+  let SheetNames = []
+  for(var i = 0; i < Sheets.length; i++){
+    SheetNames.push(Sheets[i].getName())
+  }
+  //追加
+  for(var key in SheetsAndColumns){
+    if(SheetNames.indexOf(key) === - 1){
+      var NewSheet = Sheet.insertSheet(key);
+      SetRangeValues(NewSheet, 1, 1, SheetsAndColumns[key]);
+    }
+  } 
+}
